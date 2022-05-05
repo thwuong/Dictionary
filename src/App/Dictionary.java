@@ -17,7 +17,7 @@ public class Dictionary {
                 List<Node> nodesSearched = new ArrayList<>();
                 BSTree tree = new BSTree();
                 // Tạo word để hứng object
-                List<Word> list  = tree.readFormFile();
+                List<Word> list  = tree.readFormFile(url);
                 for(Word o : list){
                     tree.insert(new Node(o));
                 }
