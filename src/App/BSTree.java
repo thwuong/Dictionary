@@ -188,10 +188,10 @@ public class BSTree {
         }
 
 
-        public List<Word> readFormFile(){
+        public List<Word> readFormFile(String url){
             List<Word> list  = new ArrayList<>();
             try {
-                FileReader fr = new FileReader("D:/UDLapTrinh/eclipse-workspace/ProjectManager/models/Binary Search Tree.txt");
+                FileReader fr = new FileReader(url);
                 BufferedReader br = new BufferedReader(fr);
                 String line = "";
                 while(true){
