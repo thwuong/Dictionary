@@ -178,18 +178,16 @@ public class BSTree {
             if (focusNode != null) {
                    bw.write(focusNode.toString() +"\n");//add the current node
                    
-                   if(focusNode.left != null) write(focusNode.left,bw,url); //adds the  left node
+                   write(focusNode.left,bw,url); //adds the  left node
 
-                   if(focusNode.right != null) write(focusNode.right,bw,url); // add the right node
+                   write(focusNode.right,bw,url); // add the right node
                }
-               else{
-                   System.out.println("Your binary search tree is empty");
-               }
+           
         }
 
 
-        public List<Word> readFormFile(String url){
-            List<Word> list  = new ArrayList<>();
+        public BSTree readFormFile(String url){
+		BSTree tree = new BSTree();
             try {
                 FileReader fr = new FileReader(url);
                 BufferedReader br = new BufferedReader(fr);
@@ -204,11 +202,11 @@ public class BSTree {
                     String mean = txt[1];
                     String pronounce = txt[2];
                     String example[] = txt[3].split(",");
-                    list.add(new Word(word,mean,pronounce,example));
+                    tree.insert(new Node(new Word(word,mean,pronounce,example)));
                 }
             }catch(Exception e){
                 System.out.println("Lỗi chưa có dữ liệu");
             }
-            return list;
+            return tree;
         }
 }
