@@ -8,15 +8,15 @@ public class Dictionary {
         private static final String  url = "D:/UDLapTrinh/eclipse-workspace/ProjectManager/models/Binary Search Tree.txt";
         
 	public static void main(String[] args){
-                System.out.println("Binary Search Tree - BTS");
-		System.out.println("Cay Nhi Phan - CNP");
+                System.out.println("----Dictionary - BTS----");
                 Scanner input = new Scanner(System.in);
                 int n;
                 String keyWord ;
                 boolean exit = false;
                 List<Node> nodesSearched = new ArrayList<>();
+		List<Word> words = new ArrayList<>();
                 BSTree tree = new BSTree();
-                // Tạo word để hứng object
+                // Đọc dữ liệu ra từ file
                 tree  = tree.readFormFile(url);
 		// TODO Auto-generated method stub
                 showMenu();
@@ -24,58 +24,63 @@ public class Dictionary {
                     n = input.nextInt();
                     switch ( n ) {
                         case  1:
-                            System.out.println("Nhập các thông tin từ mới");
+                            System.out.println("----Nhập các thông tin từ mới----");
                             Word word = Nhap(tree);
                             // ton tai word
                             if(word != null){
                                 tree.insert(new Node(word));
-                                System.out.println("Thêm từ mới thành công");
+                                System.out.println("Thêm từ mới thành công!");
                             }
                             else{
                                 System.out.println("Từ đã tồn tại và đã được cập nhật");
                             }
                             break;
                         case  2:
-                            System.out.println("Nhập từ cần xóa");
+                            System.out.println("----Nhập từ cần xóa----");
                             keyWord = input.next();
                             tree.delete(keyWord);
                             break;
                         case  3:
-                            System.out.println("Nhập từ cần tìm");
+                            System.out.println("----Nhập từ cần tìm----");
                             keyWord = input.next();
                             Node nodeSearch = tree.search(keyWord);
                             // Luu danh sach tu vua tra
                             if(nodeSearch == null){
                                 // tìm những từ gần đúng
-                                System.out.println("Từ tìm không có. Đây là những từ có liên quan");
-                                tree.searchNearest(tree.root,keyWord);
+                                words = tree.searchNearest(keyWord);
+                                if(words.size() > 0) {
+					System.out.println("----Từ tìm không có!, Đây là những từ có liên quan----");
+					for (Word o : words) {
+					o.printInfo();
+				}
+                                }
                             }
                             else
                             {
                                 nodesSearched.add(nodeSearch);
-                                System.out.println("Thông tin từ cần tìm");
+                                System.out.println("----Thông tin từ cần tìm----");
                                 nodeSearch.printData();
                             }
                             break;
                         case  4:    
-                            System.out.println("4 - In cây theo Pre Order");          
+                            System.out.println("----In cây theo Pre Order----");          
                             tree.printPreOrder();
                             break;
                         case  5:
-                             System.out.println("5 - In cây theo In Order");           
+                             System.out.println("----In cây theo In Order----");           
                             tree.printInOrder();
                             break;
                         case  6:
-                            System.out.println("6 - In cây theo Post Order");
+                            System.out.println("----In cây theo Post Order----");
                             tree.printPostOrder();
                             break;
                         case  7:
-                            System.out.print("7 - Số lượng từ trong từ điển :");
+                            System.out.println("----Số lượng từ trong từ điển----");
                             System.out.println((tree.size));
                         break;
                         case  8:
                             if(nodesSearched.size() > 0){
-                                System.out.println("8 - Danh sách từ đã tra");
+                                System.out.println("----Danh sách từ đã tra----");
                                 System.out.println(nodesSearched);
                             }
                             else{
@@ -87,11 +92,11 @@ public class Dictionary {
                             exit = true;
                             break;
                         default:
-                            System.out.println("Nhập số không hợp lệ! mời bạn nhập lại");
+                            System.out.println("----Nhập số không hợp lệ! mời bạn nhập lại----");
                     }
                     if(exit){
-                        System.out.println("Bạn có muốn lưu dữ liệu mới hay không");
-                        System.out.println("Nhập (số) tương ứng \n1 - lưu lại\n2 - Hủy bỏ");
+                        System.out.println("----Bạn có muốn lưu dữ liệu mới hay không----");
+                        System.out.println("----Nhập (số) tương ứng \n1 - lưu lại\n2 - Hủy bỏ----");
                         int numberCheck = input.nextInt();
                         if(numberCheck == 1){
                             tree.writeToFile(url);
@@ -101,7 +106,7 @@ public class Dictionary {
                             nodesSearched.clear();
                         }
                         // Ghi file
-                        System.out.println("Cảm ơn đã sử dụng ứng dụng");
+                        System.out.println("----Cảm ơn đã sử dụng ứng dụng----");
                         System.out.println(""
                       + "(¯`*•.¸,¤°´’`°¤,¸.•*´¯)\n" +
                         "    Cảm ơn rất nhiều \n" +
@@ -135,11 +140,11 @@ public class Dictionary {
                 return null;
             }
             else{
-                System.out.println("Nhập Mean(Nghĩa của từ)");
+                System.out.println("----Nhập Mean(Nghĩa của từ)----");
                 mean = input.nextLine();
-                System.out.println("Nhập Pronounce(Phát âm)");
+                System.out.println("----Nhập Pronounce(Phát âm)----");
                 pronounce = input.nextLine();
-                System.out.println("Nhập số lượng Example(Ví dụ) tối đa 3 Example");
+                System.out.println("----Nhập số lượng Example(Ví dụ) tối đa 3 Example----");
                 int sl = input.nextInt();
                 input.nextLine();
                 String[] example = new String[sl];
@@ -164,7 +169,7 @@ public class Dictionary {
             System.out.println("8 - Danh sách từ đã tra");
             System.out.println("0 - exit.");
             System.out.println("---------------------------");
-            System.out.println("Người dùng hãy nhập (số) tương ứng với chức năng cần dùng");
+            System.out.println("----Người dùng hãy nhập (số) tương ứng với chức năng cần dùng----");
         }
 }
 // thêm ví dụ ........ success
