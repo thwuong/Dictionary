@@ -44,15 +44,22 @@ public class BSTree {
                 else
                     return search(node.right,word);         
 	 }
-	 
-	 public void searchNearest(Node node, String word) {
+	 // Tim gan dung
+	 public List<Word> searchNearest(String word) {
+		 List<Word> words = new ArrayList<>();
+		 searchNearest(this.root,word,words);
+		 return words;
+	 }
+	 private void searchNearest(Node node, String word,List<Word> words ) {
                 if(node != null) {
-                   if(node.nearestWord(word)){
-                   node.printData();
-                   }
-                   searchNearest(node.left,word);
-                   searchNearest(node.right,word);
+                	if(node.nearestWord(word))
+             	   		words.add(node.word);
+                
+                	searchNearest(node.left,word,words);
+            
+                	searchNearest(node.right,word,words);
                 }
+                
 	 }
 	 // them node moi cho cay
 	 public void insert(Node node) {
